@@ -1,0 +1,164 @@
+    {
+      {
+        displayName = "Logic Processor",
+        itemId = "appliedenergistics2:item.ItemMultiMaterial",
+        variant = 22,
+        minQuantity = 256,
+        batchSize = 64
+      },
+      {
+        displayName = "Calculation Processor",
+        itemId = "appliedenergistics2:item.ItemMultiMaterial",
+        variant = 23,
+        minQuantity = 256,
+        batchSize = 64
+      },
+      {
+        displayName = "Engineering Processor",
+        itemId = "appliedenergistics2:item.ItemMultiMaterial",
+        variant = 24,
+        minQuantity = 256,
+        batchSize = 64
+      },
+      {
+        displayName = "Sand",
+        itemId = "minecraft:sand",
+        variant = 0,
+        minQuantity = 10000,
+        batchSize = 64
+      },
+      {
+        displayName = "Glass",
+        itemId = "minecraft:glass",
+        variant = 0,
+        minQuantity = 10000,
+        batchSize = 64
+      },
+	  {
+        displayName = "Gravel",
+        itemId = "minecraft:gravel",
+        variant = 0,
+        minQuantity = 10000,
+        batchSize = 64
+      },
+      {
+        displayName = "Oak Wood Planks",
+        itemId = "minecraft:planks",
+        variant = 0,
+        minQuantity = 10000,
+        batchSize = 64
+      },
+      {
+        displayName = "Pure Fluix Crystal",
+        itemId = "appliedenergistics2:item.ItemMultiMaterial",
+        variant = 12,
+        minQuantity = 256,
+        batchSize = 64
+      },
+      {
+        displayName = "Pure Certus Quartz Crystal",
+        itemId = "appliedenergistics2:item.ItemMultiMaterial",
+        variant = 10,
+        minQuantity = 5000,
+        batchSize = 64
+      },
+      {
+        displayName = "Dark Steel Ingot",
+        itemId = "EnderIO:itemMaterial",
+        variant = 6,
+        minQuantity = 64,
+        batchSize = 64
+      },
+      {
+        displayName = "Fluix Crystal",
+        itemId = "appliedenergistics2:item.ItemMultiMaterial",
+        variant = 7,
+        minQuantity = 256,
+        batchSize = 16
+      },
+	  {
+        displayName = "Enriched Alloy",
+        itemId = "Mekanism:EnrichedAlloy",
+        variant = 0,
+        minQuantity = 128,
+        batchSize = 16
+      },
+	  {
+        displayName = "Reinforced Alloy",
+        itemId = "Mekanism:ReinforcedAlloy",
+        variant = 0,
+        minQuantity = 64,
+        batchSize = 16
+      },
+	  {
+        displayName = "Atomic Alloy",
+        itemId = "Mekanism:AtomicAlloy",
+        variant = 0,
+        minQuantity = 64,
+        batchSize = 16
+      },
+	  {
+        displayName = "Vibrant Alloy Ingot",
+        itemId = "EnderIO:ItemAlloy",
+        variant = 2,
+        minQuantity = 320,
+        batchSize = 64
+      },
+	  {
+        displayName = "Energetic Alloy Ingot",
+        itemId = "EnderIO:ItemAlloy",
+        variant = 1,
+        minQuantity = 320,
+        batchSize = 64
+      },
+	  {
+        displayName = "Steel Ingot",
+        itemId = "Mekanism:Ingot",
+        variant = 4,
+        minQuantity = 128,
+        batchSize = 64
+      },
+	  {
+        displayName = "Basic Control Circuit",
+        itemId = "Mekanism:ControlCircuit",
+        variant = 0,
+        minQuantity = 64,
+        batchSize = 64
+      },
+	  {
+        displayName = "Advanced Control Circuit",
+        itemId = "Mekanism:ControlCircuit",
+        variant = 1,
+        minQuantity = 64,
+        batchSize = 64
+      },
+	  {
+        displayName = "Elite Control Circuit",
+        itemId = "Mekanism:ControlCircuit",
+        variant = 2,
+        minQuantity = 64,
+        batchSize = 64
+      },
+	  {
+        displayName = "Ultimate Control Circuit",
+        itemId = "Mekanism:ControlCircuit",
+        variant = 3,
+        minQuantity = 64,
+        batchSize = 64
+      },
+	  {
+        displayName = "Electrical Steel Ingot",
+        itemId = "EnderIO:ItemAlloy",
+        variant = 0,
+        minQuantity = 128,
+        batchSize = 64
+      },
+	  {
+        displayName = "Hardened Glass",
+        itemId = "ThermalExpansion:Glass",
+        variant = 0,
+        minQuantity = 512,
+        batchSize = 32
+      },
+	  
+}
