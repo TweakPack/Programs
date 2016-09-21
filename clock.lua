@@ -1,3 +1,5 @@
+-- Original clock by Fingercomp. Edit by Tweakcraft.
+
 MT_BG    = 0x000000 -- ingame time background
 MT_FG    = 0xFFFFFF -- ingame time foreground
 DAY      = 0xFFFF00
