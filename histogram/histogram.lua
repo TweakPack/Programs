@@ -25,11 +25,11 @@ local POWER_RF = 0x0002
 --[[
 Config
 @note:
-    Limits are in percentages (e.g. 1.0 = 100%, 0.0 = 0%) where the lua's float
+    Limits are in percentages (e.g. .9999 = 99,99%, .05 = 5%) where the lua's float
     precision limit is allowed 
 ]]
-local drainLimit  = .14
-local chargeLimit = .14025
+local drainLimit  = .50
+local chargeLimit = .95
 
 local storageDevice      = STORAGE_INDUCTION_MATRIX
 local capacitorBankCount = 25
@@ -140,14 +140,14 @@ end
 --[[
 @description: Draws a horizontal graph that grows dynamically to the size of the canvas
 ]]
-function graphHorizontal(xPos, yPos, graphWidth, graphHeight, inputArray, addBars, detailed, pointsColor, linesColor, textColor, bgColor)
+function graphHorizontal(xPos, yPos, graphWidth, graphHeight, inputArray, addBars, isDetailed, pointsColor, linesColor, textColor, bgColor)
     local maxValue = maxArrayValue(inputArray)
     local minValue = 0
     local arrayLen = tableLen(inputArray)
     local legendWidth = 8 
     
     -- Determine the level of detail
-    if detailed == true then
+    if isDetailed == true then
         minValue = minArrayValue(inputArray)
     end
 
@@ -226,7 +226,7 @@ end
 --[[
 Script start
 ]]
-isCharging     = false
+isCharging = false
 
 local storageObj     = nil
 local capacity       = 0
@@ -234,24 +234,35 @@ local previousEnergy = 0
 local powerCalc      = 1
 local capacity       = 0
 local storedLabel    = ''
+local powerUnitText  = ''
 
 inputArray  = {}
 outputArray = {}
 storedArray = {}
 
 -- Determine power-units for powerUnit & -mod calculations
-if storageDevice == STORAGE_CAPACITOR_BANK
-    and powerUnits == POWER_RF then
+if
+    storageDevice == STORAGE_CAPACITOR_BANK and
+    powerUnits    == POWER_RF then
         powerCalc = powerCalc
-elseif storageDevice == STORAGE_CAPACITOR_BANK
-    and powerUnits == POWER_EU then
+elseif
+    storageDevice == STORAGE_CAPACITOR_BANK and
+    powerUnits    == POWER_EU then
         powerCalc = powerCalc * .4
-elseif storageDevice == STORAGE_INDUCTION_MATRIX
-    and powerUnits == POWER_RF then
+elseif
+    storageDevice == STORAGE_INDUCTION_MATRIX and
+    powerUnits    == POWER_RF then
         powerCalc = powerCalc * .4
-elseif storageDevice == STORAGE_INDUCTION_MATRIX
-    and powerUnits == POWER_EU then
+elseif
+    storageDevice == STORAGE_INDUCTION_MATRIX and
+    powerUnits    == POWER_EU then
         -- Do absolutely nothing
+end
+
+if powerUnits == POWER_RF then
+    powerUnitText = 'RF'
+elseif powerUnits == POWER_EU then
+    powerUnitText = 'EU'
 end
 
 setCharging(false)
@@ -311,10 +322,10 @@ repeat
     graphHorizontal(82, 4, 78, 17, outputArray, true, false, 0xFF3232, 0xFFFFFF, 0xFFFFFF, 0x333333)
     graphHorizontal(2, 23, 158, 16, storedArray, false, true, 0x2E87D8, 0xFFFFFF, 0xFFFFFF, 0x333333)
 
-    drawLabel(2, 3, 78, 0x222222, 0xFFFFFF, 'INPUT: ' .. shortenNumber(input) .. 'RF')
-    drawLabel(82, 3, 78, 0x222222, 0xFFFFFF, 'OUTPUT: ' .. shortenNumber(output) .. 'RF')
+    drawLabel(2, 3, 78, 0x222222, 0xFFFFFF, 'INPUT: ' .. shortenNumber(input) .. powerUnitText)
+    drawLabel(82, 3, 78, 0x222222, 0xFFFFFF, 'OUTPUT: ' .. shortenNumber(output) .. powerUnitText)
 
-    storedLabel = shortenNumber(stored) .. 'RF (' .. round(storedPrc * 100, 100) .. '%)';
+    storedLabel = shortenNumber(stored) .. powerUnitText .. ' (' .. round(storedPrc * 100, 100) .. '%)';
     
     if isCharging == true then
         drawLabel(2, 22, 158, 0x222222, 0x66CC00, storedLabel .. ' - CHARGING')
