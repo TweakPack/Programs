@@ -39,10 +39,9 @@ local precisionDisplay = 100
 local rsIoBlock = comp.redstone
 local rsIoSide  = sides.back
 
-local powerBuffer =  -- Induction Matrix
 local inductionMatrixTable = {
     storage = {
-        label   = 'Power Storage'
+        label   = 'Power Storage',
         lookup  = 'f5d9f17b'
     },
     inputs = {
@@ -247,8 +246,8 @@ end
 ]]
 
 function augmentTable(inductionMatrix)
-    inductionMatrix.realAddress = comp.get(inductionMatrix.address)
-    inductionMatrix.proxy       = comp.proxy(inductionMatrix.realAddress)
+    inductionMatrix.address = comp.get(inductionMatrix.lookup)
+    inductionMatrix.proxy   = comp.proxy(inductionMatrix.address)
 end
 
 --[[
@@ -260,6 +259,14 @@ local powerCalc   = 1
 local inputArrays = {}
 local outputArray = {}
 local storedArray = {}
+
+local storageComp = inductionMatrix.storage.proxy
+local inputComps  = {}
+
+for key, inputItem in pairs(inductionMatrixTable.inputs) do
+    inputArrays[key] = {}
+    inputComps[key] = inputItem.proxy
+end
 
 -- Set resolution
 gpu.setResolution(resX, resY)    
@@ -296,14 +303,13 @@ repeat
     gpu.fill(1, 2, resX, resY - 2, ' ')
     
     -- Prepare datasets
-    for key, inputItem in pairs(inductionMatrixTable.inputs) do
+    for key, inputItem in pairs(inputComps) do
         table.insert(inputArrays[key], inputItem.getInput() * powerCalc)
     end
-    table.insert(outputArray, inductionMatrixTable.storage.getOutput() * powerCalc)
-    table.insert(storedArray, inductionMatrixTable.storage.getEnergy() * powerCalc)
+    table.insert(outputArray, storageComp.getOutput() * powerCalc)
+    table.insert(storedArray, storageComp.getEnergy() * powerCalc)
     
-    
-    storedPrc = inductionMatrixTable.storage / capacity
+    storedPrc = storageComp.getEnergy() / storageComp.getMaxEnergy()
     
     -- Check and toggle charging state
     if regulateLimits == true then
@@ -317,6 +323,7 @@ repeat
     columnWidth = resX / #inputArrays
     columnGap   = 2
     for key, inputArray in pairs(inputArrays) do
+        inputComp = inputComps[key]
         graphHorizontal(math.ceil(columnGap / 2), 4, columnWidth - columnGap, 17, inputArray, true, false, 0x66CC00, 0xFFFFFF, 0xFFFFFF, 0x333333)
     end
 
