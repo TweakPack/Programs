@@ -4,21 +4,18 @@
 @author: McBrown (september 2016)
 @description: This script generates 3 horizontal graphs, that shows the
     power input, -output & -stored.
+    MULTI-INPUT EDITION
 ]]
-
 
 --[[
 Require's
 ]]
-local comp = require('component');
+local comp  = require('component');
 local sides = require('sides');
-
 
 --[[
 Constants
 ]]
-local STORAGE_CAPACITOR_BANK   = 0x0001
-local STORAGE_INDUCTION_MATRIX = 0x0002
 local POWER_EU = 0x0001
 local POWER_RF = 0x0002
 
@@ -28,12 +25,11 @@ Config
     Limits are in percentages (e.g. 1.0 = 100%, 0.0 = 0%) where the lua's float
     precision limit is allowed 
 ]]
-local drainLimit  = .50
-local chargeLimit = .95
+local regulateLimits = true
+local drainLimit     = .50
+local chargeLimit    = .95
 
-local storageDevice      = STORAGE_INDUCTION_MATRIX
-local capacitorBankCount = 25
-local powerUnits         = POWER_RF
+local powerUnits       = POWER_RF
 
 local resX, resY       = 160, 40
 local refreshRate      = 3 --screen update frequency(seconds)
@@ -43,20 +39,26 @@ local precisionDisplay = 100
 local rsIoBlock = comp.redstone
 local rsIoSide  = sides.back
 
-local powerBuffer = comp.get('f5d9f17b') -- Induction Matrix
-local inputSources = {
-  {
-    label   = 'Bio Fuel',
-    address = comp.get('3f6ed800')
-  }, 
-  {
-    label   = 'Solar Panels',
-    address = comp.get('3ba48828')
-  },
-  {
-    label   = 'Fusion Reactor',
-    address = comp.get('3b6576e4')
-  }
+local powerBuffer =  -- Induction Matrix
+local inductionMatrixTable = {
+    storage = {
+        label   = 'Power Storage'
+        lookup  = 'f5d9f17b'
+    },
+    inputs = {
+        {
+            label  = 'Bio Fuel',
+            lookup = '3f6ed800'
+        }, 
+        {
+            label  = 'Solar Panels',
+            lookup = '3ba48828'
+        },
+        {
+            label  = 'Fusion Reactor',
+            lookup = '3b6576e4'
+        }
+    }
 }
 
 --[[ Don't change below this line (unless you know what you're doing) ]]
@@ -226,7 +228,7 @@ end
 
 
 --[[
-@description: sets charging-state and toggles the Redstone IO block 
+@description: Sets charging-state and toggles the Redstone IO block 
 ]]
 function setCharging(charging)
   isCharging = charging
@@ -240,124 +242,96 @@ end
 
 
 --[[
+@description: Augments the table with the actual objects, so they dont have to
+    be collected at a later time.
+]]
+
+function augmentTable(inductionMatrix)
+    inductionMatrix.realAddress = comp.get(inductionMatrix.address)
+    inductionMatrix.proxy       = comp.proxy(inductionMatrix.realAddress)
+end
+
+--[[
 Script start
 ]]
-isCharging     = false
+local powerCalc   = 1
 
-local storageObj     = nil
-local capacity       = 0
-local previousEnergy = 0
-local powerCalc      = 1
-local capacity       = 0
-local storedLabel    = ''
-
-inputArrays  = {}
-outputArray = {}
-storedArray = {}
-
--- Determine power-units for powerUnit & -mod calculations
-if storageDevice == STORAGE_CAPACITOR_BANK
-    and powerUnits == POWER_RF then
-        powerCalc = powerCalc
-elseif storageDevice == STORAGE_CAPACITOR_BANK
-    and powerUnits == POWER_EU then
-        powerCalc = powerCalc * .4
-elseif storageDevice == STORAGE_INDUCTION_MATRIX
-    and powerUnits == POWER_RF then
-        powerCalc = powerCalc * .4
-elseif storageDevice == STORAGE_INDUCTION_MATRIX
-    and powerUnits == POWER_EU then
-        -- Do absolutely nothing
-end
-
-setCharging(false)
+-- Array's that are pushed and popped
+local inputArrays = {}
+local outputArray = {}
+local storedArray = {}
 
 -- Set resolution
-gpu.setResolution(resX, resY)
+gpu.setResolution(resX, resY)    
+gpu.setBackground(0x141414) -- main background color
 
--- Determine storage device
-if storageDevice == STORAGE_CAPACITOR_BANK then
-    storageObj = comp.tile_blockcapacitorbank_name
-    capacity   = storageObj.getMaxEnergyStored() * capacitorBankCount * powerCalc
-elseif storageDevice == STORAGE_INDUCTION_MATRIX then
-    comp.setPrimary('induction_matrix', powerBuffer)
-    storageObj = comp.getPrimary('induction_matrix')
-    capacity   = storageObj.getMaxEnergy() * powerCalc
+-- Determine if limits need to be regulated
+if regulateLimits == true then
+    isCharging = false
+    setCharging(false)
 end
 
--- Draw top label
-drawLabel(1, 1, 160, 0x222222, 0xFFFFFF, 'ENERGY MONITOR')
+-- Determine power-units for powerUnit & -mod calculations
+if powerUnits == POWER_RF then
+    powerUnitText = 'RF'
+    powerCalc     = powerCalc * .4
+elseif powerUnits == POWER_EU then
+    powerUnitText = 'EU'
+end
 
--- Draw legend
+augmentTable(inductionMatrixTable.storage)
+for _, inputRef in pairs(inductionMatrixTable.inputs) do
+    augmentTable(inputRef)
+end
+
+-- Draw top label & legend
+drawLabel(1, 1, 160, 0x222222, 0xFFFFFF, 'ENERGY MONITOR')
 drawLabel(1, resY, 160, 0x222222, 0x969696, '(Drain limit: ' .. round(drainLimit * 100, 100) .. '%, Charge limit: ' .. round(chargeLimit * 100, 100) .. '%)')
 
 --[[
 Begin application loop
 ]]
 repeat
-    -- Determine storage device
-    if storageDevice == STORAGE_CAPACITOR_BANK then
-        stored = storageObj.getEnergyStored() * capacitorBankCount * powerCalc 
-        if previousEnergy > stored then
-              input  = 0
-              output = previousEnergy - stored
-        elseif previousEnergy < stored then
-              input  = stored - previousEnergy
-              output = 0
-        else
-              input  = 0
-              output = 0
-        end
-        previousEnergy = stored
-    elseif storageDevice == STORAGE_INDUCTION_MATRIX then
-        for key, inputID in pairs(inputSources) do
-            comp.setPrimary('induction_matrix', inputID.address)
-            input[key]  = comp.getPrimary('induction_matrix').getInput() * powerCalc
-        end
-        output = storageObj.getOutput() * powerCalc
-        stored = storageObj.getEnergy() * powerCalc
-    end
-
-    storedPrc = stored / capacity
-
-    for key, inputVal in pairs(input) do
-        table.insert(inputArrays[key], inputVal)
-    end
-
-    table.insert(outputArray, output)
-    table.insert(storedArray, stored)
-
-    gpu.setBackground(0x141414) -- main background color
+    gpu.setBackground(0x000000)
     gpu.fill(1, 2, resX, resY - 2, ' ')
-
-    totalWidth  = 160
-    columnWidth = totalWith / #inputArrays
+    
+    -- Prepare datasets
+    for key, inputItem in pairs(inductionMatrixTable.inputs) do
+        table.insert(inputArrays[key], inputItem.getInput() * powerCalc)
+    end
+    table.insert(outputArray, inductionMatrixTable.storage.getOutput() * powerCalc)
+    table.insert(storedArray, inductionMatrixTable.storage.getEnergy() * powerCalc)
+    
+    
+    storedPrc = inductionMatrixTable.storage / capacity
+    
+    -- Check and toggle charging state
+    if regulateLimits == true then
+        if isCharging == false and storedPrc <= drainLimit then
+            setCharging(true)
+        elseif isCharging == true and storedPrc >= chargeLimit then
+            setCharging(false)
+        end
+    end
+    
+    columnWidth = resX / #inputArrays
     columnGap   = 2
     for key, inputArray in pairs(inputArrays) do
         graphHorizontal(math.ceil(columnGap / 2), 4, columnWidth - columnGap, 17, inputArray, true, false, 0x66CC00, 0xFFFFFF, 0xFFFFFF, 0x333333)
     end
 
-    graphHorizontal(134, 23, 26, 16, outputArray, true, false, 0xFF3232, 0xFFFFFF, 0xFFFFFF, 0x333333)
     graphHorizontal(2, 23, 130, 16, storedArray, false, true, 0x2E87D8, 0xFFFFFF, 0xFFFFFF, 0x333333)
-
-    drawLabel(2, 3, 78, 0x222222, 0xFFFFFF, 'INPUT: ' .. shortenNumber(input) .. 'RF')
-    drawLabel(82, 3, 78, 0x222222, 0xFFFFFF, 'OUTPUT: ' .. shortenNumber(output) .. 'RF')
-
+    graphHorizontal(134, 23, 26, 16, outputArray, true, false, 0xFF3232, 0xFFFFFF, 0xFFFFFF, 0x333333)
+    
+    -- drawLabel(2, 3, 78, 0x222222, 0xFFFFFF, 'INPUT: ' .. shortenNumber(input) .. 'RF')
+    drawLabel(134, 22, 26, 0x222222, 0xFFFFFF, 'OUTPUT: ' .. shortenNumber(input))
+    
     storedLabel = shortenNumber(stored) .. 'RF (' .. round(storedPrc * 100, 100) .. '%)';
     
-    if isCharging == true then
+    if regulateLimits == true and isCharging == true then
         drawLabel(2, 22, 130, 0x222222, 0x66CC00, storedLabel .. ' - CHARGING')
     else
         drawLabel(2, 22, 130, 0x222222, 0xFFFFFF, storedLabel)
-    end
-
-    drawLabel(134, 22, 26, 0x222222, 0xFFFFFF, 'Output')
-
-    -- Check and toggle charging state
-    if isCharging == false and storedPrc <= drainLimit then
-        setCharging(true)
-    elseif isCharging == true and storedPrc >= chargeLimit then
-        setCharging(false)
     end
     
     -- Don't loop like a truck beserker
