@@ -320,7 +320,7 @@ repeat
 
     storedPrc = stored / capacity
 
-    for key, inputVal in pairs(input)
+    for key, inputVal in pairs(input) do
         table.insert(inputArrays[key], inputVal)
     end
 
@@ -333,7 +333,7 @@ repeat
     totalWidth  = 160
     columnWidth = totalWith / #inputArrays
     columnGap   = 2
-    for key, inputArray in pairs(inputArrays)
+    for key, inputArray in pairs(inputArrays) do
         graphHorizontal(math.ceil(columnGap / 2), 4, columnWidth - columnGap, 17, inputArray, true, false, 0x66CC00, 0xFFFFFF, 0xFFFFFF, 0x333333)
     end
 
