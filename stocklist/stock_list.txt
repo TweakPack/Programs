@@ -1,162 +1,162 @@
     {
       {
-        displayName = "Logic Processor",
-        itemId = "appliedenergistics2:item.ItemMultiMaterial",
-        variant = 22,
+        label = "Logic Processor",
+        name = "appliedenergistics2:item.ItemMultiMaterial",
+        damage = 22,
         minQuantity = 256,
         batchSize = 64
       },
       {
-        displayName = "Calculation Processor",
-        itemId = "appliedenergistics2:item.ItemMultiMaterial",
-        variant = 23,
+        label = "Calculation Processor",
+        name = "appliedenergistics2:item.ItemMultiMaterial",
+        damage = 23,
         minQuantity = 256,
         batchSize = 64
       },
       {
-        displayName = "Engineering Processor",
-        itemId = "appliedenergistics2:item.ItemMultiMaterial",
-        variant = 24,
+        label = "Engineering Processor",
+        name = "appliedenergistics2:item.ItemMultiMaterial",
+        damage = 24,
         minQuantity = 256,
         batchSize = 64
       },
       {
-        displayName = "Sand",
-        itemId = "minecraft:sand",
-        variant = 0,
+        label = "Sand",
+        name = "minecraft:sand",
+        damage = 0,
         minQuantity = 10000,
         batchSize = 64
       },
       {
-        displayName = "Glass",
-        itemId = "minecraft:glass",
-        variant = 0,
+        label = "Glass",
+        name = "minecraft:glass",
+        damage = 0,
         minQuantity = 10000,
         batchSize = 64
       },
 	  {
-        displayName = "Gravel",
-        itemId = "minecraft:gravel",
-        variant = 0,
+        label = "Gravel",
+        name = "minecraft:gravel",
+        damage = 0,
         minQuantity = 10000,
         batchSize = 64
       },
       {
-        displayName = "Oak Wood Planks",
-        itemId = "minecraft:planks",
-        variant = 0,
+        label = "Oak Wood Planks",
+        name = "minecraft:planks",
+        damage = 0,
         minQuantity = 10000,
         batchSize = 64
       },
       {
-        displayName = "Pure Fluix Crystal",
-        itemId = "appliedenergistics2:item.ItemMultiMaterial",
-        variant = 12,
+        label = "Pure Fluix Crystal",
+        name = "appliedenergistics2:item.ItemMultiMaterial",
+        damage = 12,
         minQuantity = 256,
         batchSize = 64
       },
       {
-        displayName = "Pure Certus Quartz Crystal",
-        itemId = "appliedenergistics2:item.ItemMultiMaterial",
-        variant = 10,
+        label = "Pure Certus Quartz Crystal",
+        name = "appliedenergistics2:item.ItemMultiMaterial",
+        damage = 10,
         minQuantity = 5000,
         batchSize = 64
       },
       {
-        displayName = "Dark Steel Ingot",
-        itemId = "EnderIO:itemMaterial",
-        variant = 6,
+        label = "Dark Steel Ingot",
+        name = "EnderIO:itemMaterial",
+        damage = 6,
         minQuantity = 64,
         batchSize = 64
       },
       {
-        displayName = "Fluix Crystal",
-        itemId = "appliedenergistics2:item.ItemMultiMaterial",
-        variant = 7,
+        label = "Fluix Crystal",
+        name = "appliedenergistics2:item.ItemMultiMaterial",
+        damage = 7,
         minQuantity = 256,
         batchSize = 16
       },
 	  {
-        displayName = "Enriched Alloy",
-        itemId = "Mekanism:EnrichedAlloy",
-        variant = 0,
+        label = "Enriched Alloy",
+        name = "Mekanism:EnrichedAlloy",
+        damage = 0,
         minQuantity = 128,
         batchSize = 16
       },
 	  {
-        displayName = "Reinforced Alloy",
-        itemId = "Mekanism:ReinforcedAlloy",
-        variant = 0,
+        label = "Reinforced Alloy",
+        name = "Mekanism:ReinforcedAlloy",
+        damage = 0,
         minQuantity = 64,
         batchSize = 16
       },
 	  {
-        displayName = "Atomic Alloy",
-        itemId = "Mekanism:AtomicAlloy",
-        variant = 0,
+        label = "Atomic Alloy",
+        name = "Mekanism:AtomicAlloy",
+        damage = 0,
         minQuantity = 64,
         batchSize = 16
       },
 	  {
-        displayName = "Vibrant Alloy Ingot",
-        itemId = "EnderIO:ItemAlloy",
-        variant = 2,
+        label = "Vibrant Alloy Ingot",
+        name = "EnderIO:ItemAlloy",
+        damage = 2,
         minQuantity = 320,
         batchSize = 64
       },
 	  {
-        displayName = "Energetic Alloy Ingot",
-        itemId = "EnderIO:ItemAlloy",
-        variant = 1,
+        label = "Energetic Alloy Ingot",
+        name = "EnderIO:ItemAlloy",
+        damage = 1,
         minQuantity = 320,
         batchSize = 64
       },
 	  {
-        displayName = "Steel Ingot",
-        itemId = "Mekanism:Ingot",
-        variant = 4,
+        label = "Steel Ingot",
+        name = "Mekanism:Ingot",
+        damage = 4,
         minQuantity = 128,
         batchSize = 64
       },
 	  {
-        displayName = "Basic Control Circuit",
-        itemId = "Mekanism:ControlCircuit",
-        variant = 0,
+        label = "Basic Control Circuit",
+        name = "Mekanism:ControlCircuit",
+        damage = 0,
         minQuantity = 64,
         batchSize = 64
       },
 	  {
-        displayName = "Advanced Control Circuit",
-        itemId = "Mekanism:ControlCircuit",
-        variant = 1,
+        label = "Advanced Control Circuit",
+        name = "Mekanism:ControlCircuit",
+        damage = 1,
         minQuantity = 64,
         batchSize = 64
       },
 	  {
-        displayName = "Elite Control Circuit",
-        itemId = "Mekanism:ControlCircuit",
-        variant = 2,
+        label = "Elite Control Circuit",
+        name = "Mekanism:ControlCircuit",
+        damage = 2,
         minQuantity = 64,
         batchSize = 64
       },
 	  {
-        displayName = "Ultimate Control Circuit",
-        itemId = "Mekanism:ControlCircuit",
-        variant = 3,
+        label = "Ultimate Control Circuit",
+        name = "Mekanism:ControlCircuit",
+        damage = 3,
         minQuantity = 64,
         batchSize = 64
       },
 	  {
-        displayName = "Electrical Steel Ingot",
-        itemId = "EnderIO:ItemAlloy",
-        variant = 0,
+        label = "Electrical Steel Ingot",
+        name = "EnderIO:ItemAlloy",
+        damage = 0,
         minQuantity = 128,
         batchSize = 64
       },
 	  {
-        displayName = "Hardened Glass",
-        itemId = "ThermalExpansion:Glass",
-        variant = 0,
+        label = "Hardened Glass",
+        name = "ThermalExpansion:Glass",
+        damage = 0,
         minQuantity = 512,
         batchSize = 32
       },
