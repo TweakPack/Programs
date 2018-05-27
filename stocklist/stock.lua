@@ -36,7 +36,7 @@
 -- **                           shows current stock levels, crafting status (sort  ** --
 -- **                           of) and if something can't be crafted because the  ** --
 -- **                           ME network lacks a free crafting CPU               ** --
--- **    26th Mar 2018: [vF.13] Updated parts of the code to newer                 ** --
+-- **    26th May 2018: [vF.13] Updated parts of the code to newer                 ** --
 -- **                           OC and AE versions                                 ** --
 -- **                                                                              ** --
 -- **  TODO:                                                                       ** --
@@ -204,7 +204,7 @@ function stockItem(currItem, stocks, ae2)
     print(stockSetting.label .. ": " .. currItemStack.size .. "≥" .. stockSetting.minQuantity)
     return
   end
-  if (isDelayed(currItemStack.fingerprint, delayedItems)) then
+  if (isDelayed(currItemStack, delayedItems)) then
     print(stockSetting.label .. ": Currently crafting.")
     return
   end
