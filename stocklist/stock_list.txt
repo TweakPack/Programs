@@ -1,164 +1,171 @@
-    {
+   {
       {
         label = "Logic Processor",
-        name = "appliedenergistics2:item.ItemMultiMaterial",
+        name = "appliedenergistics2:material",
         damage = 22,
         minQuantity = 256,
         batchSize = 64
       },
       {
         label = "Calculation Processor",
-        name = "appliedenergistics2:item.ItemMultiMaterial",
+        name = "appliedenergistics2:material",
         damage = 23,
         minQuantity = 256,
         batchSize = 64
       },
       {
         label = "Engineering Processor",
-        name = "appliedenergistics2:item.ItemMultiMaterial",
+        name = "appliedenergistics2:material",
         damage = 24,
         minQuantity = 256,
-        batchSize = 64
-      },
-      {
-        label = "Sand",
-        name = "minecraft:sand",
-        damage = 0,
-        minQuantity = 10000,
-        batchSize = 64
-      },
-      {
-        label = "Glass",
-        name = "minecraft:glass",
-        damage = 0,
-        minQuantity = 10000,
-        batchSize = 64
-      },
-	  {
-        label = "Gravel",
-        name = "minecraft:gravel",
-        damage = 0,
-        minQuantity = 10000,
         batchSize = 64
       },
       {
         label = "Oak Wood Planks",
         name = "minecraft:planks",
         damage = 0,
-        minQuantity = 10000,
+        minQuantity = 1000,
         batchSize = 64
       },
       {
         label = "Pure Fluix Crystal",
-        name = "appliedenergistics2:item.ItemMultiMaterial",
+        name = "appliedenergistics2:material",
         damage = 12,
+        minQuantity = 256,
+        batchSize = 64
+      },
+	  {
+        label = "Pure Nether Quartz Crystal",
+        name = "appliedenergistics2:material",
+        damage = 11,
         minQuantity = 256,
         batchSize = 64
       },
       {
         label = "Pure Certus Quartz Crystal",
-        name = "appliedenergistics2:item.ItemMultiMaterial",
+        name = "appliedenergistics2:material",
         damage = 10,
-        minQuantity = 5000,
+        minQuantity = 512,
         batchSize = 64
       },
-      {
-        label = "Dark Steel Ingot",
-        name = "EnderIO:itemMaterial",
-        damage = 6,
-        minQuantity = 64,
-        batchSize = 64
-      },
-      {
+	  {
         label = "Fluix Crystal",
-        name = "appliedenergistics2:item.ItemMultiMaterial",
+        name = "appliedenergistics2:material",
         damage = 7,
         minQuantity = 256,
         batchSize = 16
       },
 	  {
         label = "Enriched Alloy",
-        name = "Mekanism:EnrichedAlloy",
+        name = "mekanism:enrichedalloy",
         damage = 0,
         minQuantity = 128,
         batchSize = 16
       },
 	  {
         label = "Reinforced Alloy",
-        name = "Mekanism:ReinforcedAlloy",
+        name = "mekanism:reinforcedalloy",
         damage = 0,
         minQuantity = 64,
         batchSize = 16
       },
 	  {
         label = "Atomic Alloy",
-        name = "Mekanism:AtomicAlloy",
+        name = "mekanism:atomicalloy",
         damage = 0,
         minQuantity = 64,
         batchSize = 16
       },
 	  {
         label = "Vibrant Alloy Ingot",
-        name = "EnderIO:ItemAlloy",
+        name = "enderio:item_alloy_ingot",
         damage = 2,
         minQuantity = 320,
         batchSize = 64
       },
 	  {
         label = "Energetic Alloy Ingot",
-        name = "EnderIO:ItemAlloy",
+        name = "enderio:item_alloy_ingot",
         damage = 1,
         minQuantity = 320,
         batchSize = 64
       },
 	  {
-        label = "Steel Ingot",
-        name = "Mekanism:Ingot",
-        damage = 4,
+        label = "Electrical Steel Ingot",
+        name = "enderio:item_alloy_ingot",
+        damage = 0,
         minQuantity = 128,
         batchSize = 64
       },
 	  {
-        label = "Basic Control Circuit",
-        name = "Mekanism:ControlCircuit",
-        damage = 0,
+        label = "Dark Steel Ingot",
+        name = "enderio:item_alloy_ingot",
+        damage = 6,
         minQuantity = 64,
         batchSize = 64
       },
 	  {
-        label = "Advanced Control Circuit",
-        name = "Mekanism:ControlCircuit",
-        damage = 1,
-        minQuantity = 64,
-        batchSize = 64
-      },
-	  {
-        label = "Elite Control Circuit",
-        name = "Mekanism:ControlCircuit",
-        damage = 2,
-        minQuantity = 64,
+        label = "Steel Ingot",
+        name = "thermalfoundation:material",
+        damage = 160,
+        minQuantity = 128,
         batchSize = 64
       },
 	  {
         label = "Ultimate Control Circuit",
-        name = "Mekanism:ControlCircuit",
+        name = "mekanism:controlcircuit",
         damage = 3,
         minQuantity = 64,
         batchSize = 64
       },
 	  {
-        label = "Electrical Steel Ingot",
-        name = "EnderIO:ItemAlloy",
-        damage = 0,
-        minQuantity = 128,
+        label = "Elite Control Circuit",
+        name = "mekanism:controlcircuit",
+        damage = 2,
+        minQuantity = 64,
         batchSize = 64
       },
 	  {
-        label = "Hardened Glass",
-        name = "ThermalExpansion:Glass",
-        damage = 0,
-        minQuantity = 512,
-        batchSize = 32
+        label = "Advanced Control Circuit",
+        name = "mekanism:controlcircuit",
+        damage = 1,
+        minQuantity = 64,
+        batchSize = 64
       },
-	  
+	  {
+        label = "Basic Control Circuit",
+        name = "mekanism:controlcircuit",
+        damage = 0,
+        minQuantity = 64,
+        batchSize = 64
+      },
+	  {
+        label = "Delighted Meal",
+        name = "harvestcraft:delightedmealitem",
+        damage = 0,
+        minQuantity = 256,
+        batchSize = 16
+      },
+	  {
+        label = "Iron Plate",
+        name = "thermalfoundation:material",
+        damage = 32,
+        minQuantity = 1024,
+        batchSize = 64
+      },
+	  {
+        label = "Basic Machine Casing",
+        name = "ic2:resource",
+        damage = 12,
+        minQuantity = 64,
+        batchSize = 4
+      },
+	  {
+        label = "Titanium Ingot",
+        name = "libvulpes:productingot",
+        damage = 7,
+        minQuantity = 512,
+        batchSize = 64
+      },
+
 }
